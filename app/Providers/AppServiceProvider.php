@@ -21,4 +21,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    protected $policies = [
+        Chirp::class => ChirpPolicy::class,
+    ];
+    
+
 }

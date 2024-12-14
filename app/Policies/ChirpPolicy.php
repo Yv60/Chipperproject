@@ -52,9 +52,7 @@ class ChirpPolicy
 
     {
 
-        //
-
-        return $this->update($user, $chirp);
+        return $user->id === $chirp->user_id;
 
     }
 
