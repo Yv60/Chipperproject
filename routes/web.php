@@ -5,6 +5,24 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChirpController;
 
 
+use App\Http\Controllers\KeycloakController;
+
+Route::get('login', [KeycloakController::class, 'redirectToProvider'])->name('login');
+Route::get('callback', [KeycloakController::class, 'handleProviderCallback']);
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('profile/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });

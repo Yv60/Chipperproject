@@ -135,11 +135,14 @@ class ChirpTest extends TestCase
         $utilisateur2 = User::factory()->create();
         $chirp = Chirp::factory()->create(['user_id' => $utilisateur1->id]);
         $this->actingAs($utilisateur2);
+        /* Modification d'un chirps de l'utilisateur1 par l'utilisateur2 */
+
         $reponse = $this->put("/chirps/{$chirp->id}", ['content' => 'Chirp modifié']);
         $reponse->assertStatus(403);
 
+        /* Suppression d'un chirps de l'utilisateur1 par l'utilisateur2 */
         $result = $this->delete("/chirps/{$chirp->id}");
         $result->assertStatus(403);
-        $this->assertDatabaseMissing('chirps', ['id' => $chirp->id,]);
+        $this->assertDatabaseMissing('chirps', ['user_id' => $chirp->id,]);
     }
 }

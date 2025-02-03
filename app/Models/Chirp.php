@@ -33,6 +33,7 @@ class Chirp extends Model
 
     }
 
-    
+
+
 
 }
